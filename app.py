@@ -8,15 +8,9 @@ import pandas as pd
 
 app = dash.Dash(__name__)
 
-POPULATION_SIZE = 200
 SELECTION_RATE = 0.1
 MUTATION_RATE = 0.01
 ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789.,;:?!_+-*/ " + 16 * "a"
-TARGET = "marcelina suszczyk"
-
-NUMBER_OF_ITERATIONS = 300
-
-
 
 app.layout = html.Div([
     html.H1("String Learning using Genetic Algorithm"),
