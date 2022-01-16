@@ -54,10 +54,11 @@ app.layout = html.Div(style={'font-family': 'Noto'}, children=[
             html.Br(),
             dbc.Row(html.Button('Submit', id='submit_button', n_clicks=0))
         ], width=4),
+
         dbc.Col([
-            html.Div(id='output_container', children=[]),
-            dcc.Graph(id="evaluation", figure={})
-        ], width=8)
+            html.Div(dcc.Graph(id="evaluation", figure={}), style={'margin': 10}),
+            html.Div(id='output_container', children=[], style={'text-align': 'center'})
+        ], width=7)
     ])
 ])
 
@@ -72,12 +73,33 @@ app.layout = html.Div(style={'font-family': 'Noto'}, children=[
 )
 def update_output(target, population_size, iterations, n_clicks):
     if target is None or target is '':
-        raise PreventUpdate
+        return '', {
+            "layout": {
+                "paper_bgcolor": "#002b36",
+                "plot_bgcolor": "#002b36",
+                "xaxis": {
+                    "visible": False
+                },
+                "yaxis": {
+                    "visible": False
+                }
+            }
+        }
     else:
         wynik, ev = ga.ga(population_size, SELECTION_RATE, MUTATION_RATE, ALPHABET, target, iterations)
-        container = "The target chosen by user was: {}".format(target)
+        container = [
+            'The target text chosen by user was "{}"'.format(target),
+            html.Br(),
+            'Every generation has {} solutions.'.format(population_size),
+            html.Br(),
+            wynik
+        ]
         fig = px.line(ev, x="generation", y="cost", hover_data=['generation', 'best chromosome', 'cost'],
                       template="solar")
+        fig.update_layout(
+            margin=dict(l=20, r=50, t=50, b=20)
+        )
+
         return container, fig
 
 
