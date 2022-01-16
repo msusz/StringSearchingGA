@@ -3,20 +3,19 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import State, Input, Output
 from dash.exceptions import PreventUpdate
-
 import plotly.express as px
+
 import ga
 
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 
 load_figure_template("solar")
-
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
 
 SELECTION_RATE = 0.1
 MUTATION_RATE = 0.01
-ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789.,;:?!_+-*/ " + 16 * "a"
+ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789. "
 
 app.layout = html.Div([
     html.H1("String Learning using Genetic Algorithm"),
@@ -67,7 +66,7 @@ def update_output(target, population_size, iterations, n_clicks):
         container = "The target chosen by user was: {}".format(target)
         fig = px.line(ev, x="generation", y="cost", hover_data=['generation', 'best chromosome', 'cost'],
                       template="solar")
-        return (container, fig)
+        return container, fig
 
 
 if __name__ == '__main__':
