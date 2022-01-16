@@ -24,13 +24,15 @@ h_style={'text-align': 'center', 'padding': 10}
 app.layout = html.Div(style={'font-family': 'Noto'}, children=[
     dbc.Row([
         dbc.Col([
-            html.H1(["String Learning", html.Br(), "using", html.Br(), "Genetic Algorithm"], style=h_style),
+            html.H1(["STRING LEARNING", html.Br(), "USING", html.Br(), "GENETIC ALGORITHM"], style=h_style),
+            html.Br(),
             dbc.Row([
                 html.H4("Write your target text: ", style=h_style),
                 dcc.Input(id='target',
                           type='text',
                           placeholder='your text',
-                          style={'text-align': 'center'},
+                          style={'text-align': 'center',
+                                 'padding': 10},
                           maxLength=50)
             ]),
             html.Br(),
@@ -52,11 +54,11 @@ app.layout = html.Div(style={'font-family': 'Noto'}, children=[
                 value=250,
                 tooltip={"placement": "bottom", "always_visible": True}),
             html.Br(),
-            dbc.Row(html.Button('Submit', id='submit_button', n_clicks=0))
-        ], width=4),
+            dbc.Row(html.Button('Submit', id='submit_button', n_clicks=0, style={'padding': 10}))
+        ], width=4, style={'padding': 50}),
 
         dbc.Col([
-            html.Div(dcc.Graph(id="evaluation", figure={}), style={'margin': 10}),
+            html.Div(dcc.Graph(id="evaluation", figure={}), style={'margin': 70}),
             html.Div(id='output_container', children=[], style={'text-align': 'center'})
         ], width=7)
     ])

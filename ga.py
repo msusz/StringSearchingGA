@@ -199,4 +199,5 @@ def ga(POPULATION_SIZE, SELECTION_RATE, MUTATION_RATE, ALPHABET, TARGET, NUMBER_
         evaluation = evaluation.append(temp, ignore_index=True)
         return "Target was found in " + str(generation) + " iterations.", evaluation
     else:
-        return "Target was not found.", evaluation
+        return "Target was not found. The best solution is "+decode_chromosome(population[0], ALPHABET)\
+               + " with cost " + str(calculate_cost(population[0], ENCODED_TARGET)), evaluation
