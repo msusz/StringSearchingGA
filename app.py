@@ -13,6 +13,7 @@ from dash_bootstrap_templates import load_figure_template
 load_figure_template("solar")
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
 app.title = "String Learning GA"
+server = app.server
 
 SELECTION_RATE = 0.1
 MUTATION_RATE = 0.01
